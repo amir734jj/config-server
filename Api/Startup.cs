@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using Dal;
 using EfCoreRepository.Extensions;
+using EFCoreSecondLevelCacheInterceptor;
 using Logic;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -86,6 +87,11 @@ namespace Api
             
             services.AddEfRepository<EntityDbContext>(x => x.Profiles(Assembly.Load("Dal")));
 
+            services.AddEFSecondLevelCache(options =>
+                options.UseEasyCachingCoreProvider("memory").DisableLogging(true));
+
+            services.AddEasyCaching(options => options.UseInMemory("memory"));
+            
             services.AddScoped<IConfigLogic, ConfigLogic>();
         }
 
