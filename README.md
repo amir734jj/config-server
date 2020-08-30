@@ -8,13 +8,13 @@ URL: https://simple-config-server.herokuapp.com/
 
 ```
 // Create a fresh apiKey
-POST /api
+[POST]  /api          => apiKey
 
 // Retrieve the config
-GET  /api/{apiKey} => config
+[GET]   /api/{apiKey} => config
 
 // Update the config
-PUT  /api/{apiKey} => config
+[PUT]   /api/{apiKey} => config
 
 ```
 
