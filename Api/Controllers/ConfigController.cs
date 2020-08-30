@@ -1,6 +1,8 @@
+using System.IO;
 using System.Threading.Tasks;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Api.Controllers
@@ -50,17 +52,20 @@ namespace Api.Controllers
         /// Updated the config entry
         /// </summary>
         /// <param name="key">lookup key</param>
-        /// <param name="value">update to update</param>
         /// <returns>empty response</returns>
         [HttpPut]
         [Route("{key}")]
         [SwaggerOperation("Update")]
         [ProducesResponseType(200)]
-        public async Task<IActionResult> Update([FromRoute]string key, [FromBody] string value)
+        public async Task<IActionResult> Update([FromRoute] string key)
         {
+            var value = await new StreamReader(Request.Body).ReadToEndAsync();
+            
             await _configLogic.Update(key, value);
 
-            return RedirectToAction("Load", new { key });
+            var response = await _configLogic.Load(key);
+
+            return Ok(response);
         }
     }
 }
