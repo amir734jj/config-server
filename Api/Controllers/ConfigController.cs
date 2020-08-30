@@ -48,7 +48,7 @@ namespace Api.Controllers
         }
         
         /// <summary>
-        /// Updated the config entry
+        /// Updates the config entry
         /// </summary>
         /// <param name="key">lookup key</param>
         /// <returns>empty response</returns>
