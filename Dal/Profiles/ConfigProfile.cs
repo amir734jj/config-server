@@ -1,6 +1,5 @@
 using System.Linq;
 using EfCoreRepository.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Dal.Profiles
@@ -18,7 +17,7 @@ namespace Dal.Profiles
 
         public IQueryable<Config> Include<TQueryable>(TQueryable queryable) where TQueryable : IQueryable<Config>
         {
-            return queryable.Include(x => x.Value);
+            return queryable;
         }
     }
 }

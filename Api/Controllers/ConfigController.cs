@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Api.Controllers
 {
@@ -14,8 +15,14 @@ namespace Api.Controllers
             _configLogic = configLogic;
         }
 
+        /// <summary>
+        /// Creates a new config entry
+        /// </summary>
+        /// <returns>Key to lookup the entry</returns>
         [HttpPost]
         [Route("")]
+        [SwaggerOperation("Create")]
+        [ProducesResponseType(typeof(string), 200)]
         public async Task<IActionResult> Create()
         {
             var result = await _configLogic.Create();
@@ -23,8 +30,15 @@ namespace Api.Controllers
             return Ok(result);
         }
         
+        /// <summary>
+        /// Loads the config entry
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns>Value of config entry</returns>
         [HttpGet]
         [Route("{key}")]
+        [SwaggerOperation("Load")]
+        [ProducesResponseType(typeof(string), 200)]
         public async Task<IActionResult> Load([FromRoute] string key)
         {
             var result = await _configLogic.Load(key);
@@ -32,9 +46,17 @@ namespace Api.Controllers
             return Ok(result);
         }
         
+        /// <summary>
+        /// Updated the config entry
+        /// </summary>
+        /// <param name="key">lookup key</param>
+        /// <param name="value">update to update</param>
+        /// <returns>empty response</returns>
         [HttpPut]
         [Route("{key}")]
-        public async Task<IActionResult> Create([FromRoute]string key, [FromBody] string value)
+        [SwaggerOperation("Update")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> Update([FromRoute]string key, [FromBody] string value)
         {
             await _configLogic.Update(key, value);
 

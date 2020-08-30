@@ -10,6 +10,8 @@ namespace Logic
 {
     public class ConfigLogic : IConfigLogic
     {
+        private const char Delimiter = '-';
+        
         private readonly IBasicCrudType<Config, int> _configDal;
 
         public ConfigLogic(IEfRepository repository)
@@ -62,12 +64,12 @@ namespace Logic
 
         private static string PackKey(int id, string rawKey)
         {
-            return $"{id}/{rawKey}";
+            return $"{id}{Delimiter}{rawKey}";
         }
 
         private static (int id, string rawKey) UnpackKey(string key)
         {
-            var result = key.Split("/");
+            var result = key.Split(Delimiter);
 
             return (int.Parse(result.First()), result.Last());
         }

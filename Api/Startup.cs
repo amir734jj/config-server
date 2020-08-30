@@ -43,7 +43,7 @@ namespace Api
             
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "config-server", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "config-server", Version = "v1", Description = "Simple config server"});
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
