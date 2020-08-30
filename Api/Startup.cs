@@ -45,8 +45,7 @@ namespace Api
             services.AddCors(options => options.AddPolicy("CorsPolicy", builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials()));
+                .AllowAnyMethod()));
             
             services.AddMvc().AddNewtonsoftJson();
             
