@@ -51,7 +51,7 @@ namespace Api.Controllers
         /// Updates the config entry
         /// </summary>
         /// <param name="key">lookup key</param>
-        /// <returns>empty response</returns>
+        /// <returns>Updated config entry</returns>
         [HttpPut]
         [Route("{key}")]
         [SwaggerOperation("Update")]
@@ -63,6 +63,22 @@ namespace Api.Controllers
             var result = await _configLogic.Update(key, value);
 
             return result == null ? (IActionResult) NotFound() : Ok(result);
+        }
+        
+        /// <summary>
+        /// Deletes the config entry
+        /// </summary>
+        /// <param name="key">lookup key</param>
+        /// <returns>Empty response</returns>
+        [HttpDelete]
+        [Route("{key}")]
+        [SwaggerOperation("Delete")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> Delete([FromRoute] string key)
+        {
+            await _configLogic.Delete(key);
+
+            return NoContent();
         }
     }
 }

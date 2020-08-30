@@ -64,6 +64,18 @@ namespace Logic
             return null;
         }
 
+        public async Task Delete(string key)
+        {
+            var (id, rawKey) = UnpackKey(key);
+
+            var config = await _configDal.Get(id);
+
+            if (config != null && config.Key == rawKey)
+            {
+                await _configDal.Delete(config.Id);
+            }
+        }
+
         private static string PackKey(int id, string rawKey)
         {
             return $"{id}{Delimiter}{rawKey}";
