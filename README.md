@@ -15,7 +15,6 @@ URL: https://simple-config-server.herokuapp.com/
 
 // Update the config
 [PUT]   /api/{apiKey} => config
-
 ```
 
 Rules:
