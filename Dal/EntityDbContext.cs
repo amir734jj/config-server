@@ -22,6 +22,7 @@ namespace Dal
         {
             base.OnModelCreating(modelBuilder);
 
+            // Ensure apiKey is unique
             modelBuilder.Entity<Config>()
                 .HasIndex(x => x.Key)
                 .IsUnique();

@@ -17,7 +17,7 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Creates a new config entry
+        /// Creates a new config entry and returns the apiKey
         /// </summary>
         /// <returns>Key to lookup the entry</returns>
         [HttpPost]
@@ -32,7 +32,7 @@ namespace Api.Controllers
         }
         
         /// <summary>
-        /// Loads the config entry
+        /// Loads the config entry given an apiKey
         /// </summary>
         /// <param name="key"></param>
         /// <returns>Value of config entry</returns>
@@ -48,7 +48,7 @@ namespace Api.Controllers
         }
         
         /// <summary>
-        /// Updates the config entry
+        /// Updates the config entry given an apiKey
         /// </summary>
         /// <param name="key">lookup key</param>
         /// <returns>Updated config entry</returns>
