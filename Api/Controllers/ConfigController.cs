@@ -60,7 +60,7 @@ namespace Api.Controllers
         {
             var value = await new StreamReader(Request.Body).ReadToEndAsync();
 
-            if (value.Length * sizeof(char) >= 32000)
+            if (value.Length * sizeof(char) > 32000)
             {
                 return BadRequest();
             }

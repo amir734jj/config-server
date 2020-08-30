@@ -18,11 +18,9 @@ URL: https://simple-config-server.herokuapp.com/
 
 ```
 
-Features:
-1. add limit for config value. Maybe anything greater than 64KB is banned.
+Rules:
+1. any config greater than 32KB is banned
 2. any config not used in the last 30 days automatically will be deleted
 
 TODO:
-1. ~~add limit for config value. Maybe anything greater than 32KB is banned.~~
-2. ~~any config not used in the last 30 days automatically will be deleted~~
-3. add rate limiter
+- add rate limiter
