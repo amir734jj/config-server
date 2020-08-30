@@ -43,7 +43,15 @@ namespace Api
             
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "config-server", Version = "v1", Description = "Simple config server"});
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "config-server", Version = "v1", Description = "Simple config server", Contact =
+                        new OpenApiContact
+                        {
+                            Name = "Amir",
+                            Email = "amir@hesamian.com",
+                        }
+                });
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -83,7 +91,7 @@ namespace Api
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
             // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1"));
 
             app.UseRouting()
                 .UseEndpoints(endpoint => endpoint.MapDefaultControllerRoute());

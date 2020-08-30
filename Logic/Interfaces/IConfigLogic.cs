@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Models;
 
 namespace Logic.Interfaces
 {
@@ -6,7 +7,7 @@ namespace Logic.Interfaces
     {
         public Task<string> Create();
 
-        public Task Update(string key, string value);
+        public Task<Config> Update(string key, string value);
 
         public Task<string> Load(string key);
     }

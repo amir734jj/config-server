@@ -2,12 +2,11 @@ using System.IO;
 using System.Threading.Tasks;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Api.Controllers
 {
-    [Route("api")]
+    [Route("api/v1")]
     public class ConfigController : Controller
     {
         private readonly IConfigLogic _configLogic;
@@ -45,7 +44,7 @@ namespace Api.Controllers
         {
             var result = await _configLogic.Load(key);
 
-            return Ok(result);
+            return result == null ? (IActionResult) NotFound() : Ok(result);
         }
         
         /// <summary>
@@ -61,11 +60,9 @@ namespace Api.Controllers
         {
             var value = await new StreamReader(Request.Body).ReadToEndAsync();
             
-            await _configLogic.Update(key, value);
+            var result = await _configLogic.Update(key, value);
 
-            var response = await _configLogic.Load(key);
-
-            return Ok(response);
+            return result == null ? (IActionResult) NotFound() : Ok(result);
         }
     }
 }

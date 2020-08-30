@@ -28,7 +28,7 @@ namespace Logic
             return PackKey(config.Id, password);
         }
 
-        public async Task Update(string key, string value)
+        public async Task<Config> Update(string key, string value)
         {
             var (id, rawKey) = UnpackKey(key);
 
@@ -40,8 +40,10 @@ namespace Logic
                 
                 config.Value = value;
 
-                await _configDal.Update(config.Id, config);
+                return await _configDal.Update(config.Id, config);
             }
+
+            return null;
         }
 
         public async Task<string> Load(string key)
