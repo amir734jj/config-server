@@ -21,7 +21,7 @@ namespace Logic
 
         public async Task<string> Create()
         {
-            var password = PasswordGenerator.Generate(length: 64, allowed: Sets.Alphanumerics);
+            var password = PasswordGenerator.Generate(length: 32, allowed: Sets.Alphanumerics);
 
             var config = await _configDal.Save(new Config {Key = password});
 
