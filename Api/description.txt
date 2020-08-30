@@ -1,0 +1,2 @@
+Simple config server.
+Create a new apiKey and then use that to update or get the configuration.

@@ -45,11 +45,14 @@ namespace Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "config-server", Version = "v1", Description = "Simple config server", Contact =
+                    Title = "config-server", Version = "v1",
+                    Description = File.ReadAllText("description.txt"),
+                    Contact =
                         new OpenApiContact
                         {
                             Name = "Amir",
                             Email = "amir@hesamian.com",
+                            Url = new Uri("https://github.com/amir734jj")
                         }
                 });
 
