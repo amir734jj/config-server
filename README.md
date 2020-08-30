@@ -17,3 +17,7 @@ GET  /api/{apiKey} => config
 PUT  /api/{apiKey} => config
 
 ```
+
+TODO:
+1. add limit for config value. Maybe anything greater than 64KB is banned.
+2. any config not used in the last 30 days automatically will be deleted
