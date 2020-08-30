@@ -39,6 +39,15 @@ namespace Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpsRedirection(options => options.HttpsPort = 443);
+
+            // If environment is localhost, then enable CORS policy, otherwise no cross-origin access
+            services.AddCors(options => options.AddPolicy("CorsPolicy", builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()));
+            
             services.AddMvc().AddNewtonsoftJson();
             
             services.AddSwaggerGen(c =>
@@ -88,6 +97,8 @@ namespace Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseCors("CorsPolicy");
             
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
