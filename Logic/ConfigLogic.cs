@@ -21,7 +21,7 @@ namespace Logic
 
         public async Task<string> Create()
         {
-            var password = PasswordGenerator.Generate(length: 256, allowed: Sets.Alphanumerics);
+            var password = PasswordGenerator.Generate(length: 64, allowed: Sets.Alphanumerics);
 
             var config = await _configDal.Save(new Config {Key = password});
 
@@ -74,6 +74,15 @@ namespace Logic
             {
                 await _configDal.Delete(config.Id);
             }
+        }
+
+        public async Task Cleanup()
+        {
+            var now = DateTimeOffset.Now;
+
+            await Task.WhenAll((await _configDal.GetAll())
+                .Where(x => now - x.LastAccessTime > TimeSpan.FromDays(30))
+                .Select(config => _configDal.Delete(config.Id)));
         }
 
         private static string PackKey(int id, string rawKey)

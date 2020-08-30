@@ -59,6 +59,11 @@ namespace Api.Controllers
         public async Task<IActionResult> Update([FromRoute] string key)
         {
             var value = await new StreamReader(Request.Body).ReadToEndAsync();
+
+            if (value.Length * sizeof(char) >= 32000)
+            {
+                return BadRequest();
+            }
             
             var result = await _configLogic.Update(key, value);
 

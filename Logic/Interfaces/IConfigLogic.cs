@@ -12,5 +12,7 @@ namespace Logic.Interfaces
         public Task<string> Load(string key);
         
         public Task Delete(string key);
+
+        public Task Cleanup();
     }
 }
