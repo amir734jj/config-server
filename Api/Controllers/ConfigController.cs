@@ -90,7 +90,7 @@ namespace Api.Controllers
         /// Status of server
         /// </summary>
         /// <returns>Empty response</returns>
-        [HttpDelete]
+        [HttpGet]
         [Route("Status")]
         [SwaggerOperation("Status")]
         [ProducesResponseType(200)]
