@@ -81,8 +81,16 @@ namespace Logic
             var now = DateTimeOffset.Now;
 
             await Task.WhenAll((await _configDal.GetAll())
-                .Where(x => now - x.LastAccessTime > TimeSpan.FromDays(30))
+                .Where(x => now - x.LastAccessTime > TimeSpan.FromDays(90))
                 .Select(config => _configDal.Delete(config.Id)));
+        }
+
+        public async Task<object> Status()
+        {
+            return new
+            {
+                Count = (await _configDal.GetAll()).Count()
+            };
         }
 
         private static string PackKey(int id, string rawKey)

@@ -85,5 +85,20 @@ namespace Api.Controllers
 
             return NoContent();
         }
+        
+        /// <summary>
+        /// Status of server
+        /// </summary>
+        /// <returns>Empty response</returns>
+        [HttpDelete]
+        [Route("Status")]
+        [SwaggerOperation("Status")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> Status()
+        {
+            var status = await _configLogic.Status();
+
+            return Ok(status);
+        }
     }
 }

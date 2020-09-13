@@ -14,5 +14,7 @@ namespace Logic.Interfaces
         public Task Delete(string key);
 
         public Task Cleanup();
+
+        Task<object> Status();
     }
 }
