@@ -60,6 +60,7 @@ namespace Api.Controllers
         {
             var value = await new StreamReader(Request.Body).ReadToEndAsync();
 
+            // Over 32KB is not allowed
             if (value.Length * sizeof(char) > 32000)
             {
                 return BadRequest();
