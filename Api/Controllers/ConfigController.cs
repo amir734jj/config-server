@@ -91,7 +91,7 @@ namespace Api.Controllers
         /// </summary>
         /// <returns>Empty response</returns>
         [HttpGet]
-        [Route("Status")]
+        [Route("status")]
         [SwaggerOperation("Status")]
         [ProducesResponseType(200)]
         public async Task<IActionResult> Status()
