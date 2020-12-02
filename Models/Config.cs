@@ -9,7 +9,7 @@ namespace Models
         public int Id { get; set; }
         
         [Column(TypeName = "VARCHAR(256)")]
-        public string Key { get; set; }
+        public string AuthKey { get; set; }
         
         [Column(TypeName = "text")]
         public string Value { get; set; }

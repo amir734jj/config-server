@@ -24,7 +24,7 @@ namespace Dal
 
             // Ensure apiKey is unique
             modelBuilder.Entity<Config>()
-                .HasIndex(x => x.Key)
+                .HasIndex(x => x.AuthKey)
                 .IsUnique();
         }
     }

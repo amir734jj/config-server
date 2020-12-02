@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using static Dal.Utilities.ConnectionStringUtility;
 
 namespace Api
@@ -48,7 +49,10 @@ namespace Api
                 .AllowAnyHeader()
                 .AllowAnyMethod()));
             
-            services.AddMvc().AddNewtonsoftJson();
+            services.AddMvc().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
             
             services.AddSwaggerGen(c =>
             {
