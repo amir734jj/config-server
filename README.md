@@ -1,6 +1,6 @@
 # config-server
 
-Simple config management server with end-to-end encryption
+Simple config management server with end-to-end encryption. All configs are encrypted using authenticated encryption. 
 
 Features:
 - Authenticated encryption using AES
