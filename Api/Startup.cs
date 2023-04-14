@@ -86,9 +86,7 @@ namespace Api
                                                     ?? throw new Exception("DATABASE_URL is null"));
                 opt.UseNpgsql(postgresConnectionString);
             });
-            
-            services.AddDbContext<EntityDbContext>(x => x.UseNpgsql(""));
-            
+                        
             services.AddEfRepository<EntityDbContext>(x => x.Profiles(Assembly.Load("Dal")));
 
             services.AddEFSecondLevelCache(options =>
