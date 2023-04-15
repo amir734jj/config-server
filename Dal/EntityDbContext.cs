@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Dal
@@ -15,17 +16,16 @@ namespace Dal
         // ReSharper disable once SuggestBaseTypeForParameter
         public EntityDbContext(DbContextOptions<EntityDbContext> optionsBuilderOptions) : base(optionsBuilderOptions)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
             Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // Ensure apiKey is unique
-            modelBuilder.Entity<Config>()
-                .HasIndex(x => x.AuthKey)
-                .IsUnique();
+            
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(EntityDbContext).Assembly);
         }
     }
 }

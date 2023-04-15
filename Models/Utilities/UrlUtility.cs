@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Web;
 
 namespace Models.Utilities
 {
@@ -17,14 +18,14 @@ namespace Models.Utilities
 
             if (!isUrl)
             {
-                return (default, ImmutableDictionary.Create<string, string>());
+                return (default, new Dictionary<string, string>());
             }
 
             var connectionStringBuilder = new Dictionary<string, string>
             {
                 ["Host"] = url.Host,
-                ["Username"] = url.UserInfo.Split(':').GetValue(0)?.ToString(),
-                ["Password"] = url.UserInfo.Split(':').GetValue(1)?.ToString(),
+                ["Username"] = HttpUtility.UrlDecode(url.UserInfo.Split(':').GetValue(0)?.ToString()),
+                ["Password"] = HttpUtility.UrlDecode(url.UserInfo.Split(':').GetValue(1)?.ToString()),
                 ["Database"] = url.LocalPath.Substring(1),
                 ["ApplicationName"] = "config-api"
             };

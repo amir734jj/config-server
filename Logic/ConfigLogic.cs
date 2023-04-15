@@ -17,11 +17,11 @@ namespace Logic
     {
         private const char Delimiter = '-';
 
-        private readonly IBasicCrudType<Config, int> _configDal;
+        private readonly IBasicCrud<Config> _configDal;
 
         public ConfigLogic(IEfRepository repository)
         {
-            _configDal = repository.For<Config, int>();
+            _configDal = repository.For<Config>();
         }
 
         public async Task<string> Create()
@@ -128,7 +128,7 @@ namespace Logic
 
         private static string Sha256ToString(string text)
         {
-            using var sha = new SHA256Managed();
+            using var sha = SHA256.Create();
             var textData = Encoding.UTF8.GetBytes(text);
             var hash = sha.ComputeHash(textData);
             return BitConverter.ToString(hash).Replace("-", string.Empty);

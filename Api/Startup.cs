@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Web;
 using Dal;
 using EfCoreRepository.Extensions;
 using EFCoreSecondLevelCacheInterceptor;
@@ -87,7 +88,7 @@ namespace Api
                 opt.UseNpgsql(postgresConnectionString);
             });
                         
-            services.AddEfRepository<EntityDbContext>(x => x.Profiles(Assembly.Load("Dal")));
+            services.AddEfRepository<EntityDbContext>(x => x.Profile(Assembly.Load("Dal")));
 
             services.AddEFSecondLevelCache(options =>
                 options.UseEasyCachingCoreProvider("memory").DisableLogging(true));
